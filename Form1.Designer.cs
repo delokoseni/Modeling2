@@ -44,7 +44,21 @@
             labelColumn4 = new Label();
             labelColumn5 = new Label();
             labelColumn6 = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            labelTWaitingTableP1 = new Label();
+            labelTableP17 = new Label();
+            labelTableP6 = new Label();
+            labelTableP15 = new Label();
+            labelTableP14 = new Label();
+            labelTableP13 = new Label();
+            labelTableP12 = new Label();
+            labelNumberTableP1 = new Label();
+            labelTableP11 = new Label();
+            labelTDowntimeTableP1 = new Label();
+            labelPetrovsRule = new Label();
+            labelInitialData = new Label();
             tableInitialData.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // tableInitialData
@@ -76,7 +90,7 @@
             tableInitialData.Controls.Add(labelColumn4, 5, 0);
             tableInitialData.Controls.Add(labelColumn5, 6, 0);
             tableInitialData.Controls.Add(labelColumn6, 7, 0);
-            tableInitialData.Location = new Point(346, 12);
+            tableInitialData.Location = new Point(12, 40);
             tableInitialData.Name = "tableInitialData";
             tableInitialData.RowCount = 8;
             tableInitialData.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
@@ -241,16 +255,177 @@
             labelColumn6.TabIndex = 14;
             labelColumn6.Text = "7";
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            tableLayoutPanel1.ColumnCount = 9;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.Controls.Add(labelTWaitingTableP1, 8, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP17, 7, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP6, 6, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP15, 5, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP14, 4, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP13, 3, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP12, 2, 0);
+            tableLayoutPanel1.Controls.Add(labelNumberTableP1, 0, 0);
+            tableLayoutPanel1.Controls.Add(labelTableP11, 1, 0);
+            tableLayoutPanel1.Controls.Add(labelTDowntimeTableP1, 0, 8);
+            tableLayoutPanel1.Location = new Point(480, 41);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 9;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
+            tableLayoutPanel1.Size = new Size(560, 337);
+            tableLayoutPanel1.TabIndex = 1;
+            // 
+            // labelTWaitingTableP1
+            // 
+            labelTWaitingTableP1.AutoSize = true;
+            labelTWaitingTableP1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTWaitingTableP1.Location = new Point(500, 1);
+            labelTWaitingTableP1.Name = "labelTWaitingTableP1";
+            labelTWaitingTableP1.Size = new Size(44, 20);
+            labelTWaitingTableP1.TabIndex = 8;
+            labelTWaitingTableP1.Text = "Т ож";
+            // 
+            // labelTableP17
+            // 
+            labelTableP17.AutoSize = true;
+            labelTableP17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP17.Location = new Point(438, 1);
+            labelTableP17.Name = "labelTableP17";
+            labelTableP17.Size = new Size(18, 20);
+            labelTableP17.TabIndex = 7;
+            labelTableP17.Text = "7";
+            // 
+            // labelTableP6
+            // 
+            labelTableP6.AutoSize = true;
+            labelTableP6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP6.Location = new Point(376, 1);
+            labelTableP6.Name = "labelTableP6";
+            labelTableP6.Size = new Size(18, 20);
+            labelTableP6.TabIndex = 6;
+            labelTableP6.Text = "6";
+            // 
+            // labelTableP15
+            // 
+            labelTableP15.AutoSize = true;
+            labelTableP15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP15.Location = new Point(314, 1);
+            labelTableP15.Name = "labelTableP15";
+            labelTableP15.Size = new Size(18, 20);
+            labelTableP15.TabIndex = 5;
+            labelTableP15.Text = "5";
+            // 
+            // labelTableP14
+            // 
+            labelTableP14.AutoSize = true;
+            labelTableP14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP14.Location = new Point(252, 1);
+            labelTableP14.Name = "labelTableP14";
+            labelTableP14.Size = new Size(18, 20);
+            labelTableP14.TabIndex = 4;
+            labelTableP14.Text = "4";
+            // 
+            // labelTableP13
+            // 
+            labelTableP13.AutoSize = true;
+            labelTableP13.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP13.Location = new Point(190, 1);
+            labelTableP13.Name = "labelTableP13";
+            labelTableP13.Size = new Size(18, 20);
+            labelTableP13.TabIndex = 3;
+            labelTableP13.Text = "3";
+            // 
+            // labelTableP12
+            // 
+            labelTableP12.AutoSize = true;
+            labelTableP12.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP12.Location = new Point(128, 1);
+            labelTableP12.Name = "labelTableP12";
+            labelTableP12.Size = new Size(18, 20);
+            labelTableP12.TabIndex = 2;
+            labelTableP12.Text = "2";
+            // 
+            // labelNumberTableP1
+            // 
+            labelNumberTableP1.AutoSize = true;
+            labelNumberTableP1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelNumberTableP1.Location = new Point(4, 1);
+            labelNumberTableP1.Name = "labelNumberTableP1";
+            labelNumberTableP1.Size = new Size(27, 20);
+            labelNumberTableP1.TabIndex = 0;
+            labelNumberTableP1.Text = "№";
+            // 
+            // labelTableP11
+            // 
+            labelTableP11.AutoSize = true;
+            labelTableP11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTableP11.Location = new Point(66, 1);
+            labelTableP11.Name = "labelTableP11";
+            labelTableP11.Size = new Size(18, 20);
+            labelTableP11.TabIndex = 1;
+            labelTableP11.Text = "1";
+            // 
+            // labelTDowntimeTableP1
+            // 
+            labelTDowntimeTableP1.AutoSize = true;
+            labelTDowntimeTableP1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelTDowntimeTableP1.Location = new Point(4, 297);
+            labelTDowntimeTableP1.Name = "labelTDowntimeTableP1";
+            labelTDowntimeTableP1.Size = new Size(40, 20);
+            labelTDowntimeTableP1.TabIndex = 9;
+            labelTDowntimeTableP1.Text = "Т пр";
+            // 
+            // labelPetrovsRule
+            // 
+            labelPetrovsRule.AutoSize = true;
+            labelPetrovsRule.Location = new Point(480, 9);
+            labelPetrovsRule.Name = "labelPetrovsRule";
+            labelPetrovsRule.Size = new Size(175, 20);
+            labelPetrovsRule.TabIndex = 2;
+            labelPetrovsRule.Text = "По правилу Петрова №";
+            // 
+            // labelInitialData
+            // 
+            labelInitialData.AutoSize = true;
+            labelInitialData.Location = new Point(12, 9);
+            labelInitialData.Name = "labelInitialData";
+            labelInitialData.Size = new Size(136, 20);
+            labelInitialData.TabIndex = 3;
+            labelInitialData.Text = "Исходные данные";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1782, 953);
+            Controls.Add(labelInitialData);
+            Controls.Add(labelPetrovsRule);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(tableInitialData);
             Name = "Form1";
             Text = "Модель задачи упорядочения NxM";
             tableInitialData.ResumeLayout(false);
             tableInitialData.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -273,5 +448,18 @@
         private Label labelColumn4;
         private Label labelColumn5;
         private Label labelColumn6;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label labelTWaitingTableP1;
+        private Label labelTableP17;
+        private Label labelTableP6;
+        private Label labelTableP15;
+        private Label labelTableP14;
+        private Label labelTableP13;
+        private Label labelTableP12;
+        private Label labelNumberTableP1;
+        private Label labelTableP11;
+        private Label labelTDowntimeTableP1;
+        private Label labelPetrovsRule;
+        private Label labelInitialData;
     }
 }
