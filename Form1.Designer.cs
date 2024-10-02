@@ -103,7 +103,6 @@
             tableInitialData.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5F));
             tableInitialData.Size = new Size(442, 338);
             tableInitialData.TabIndex = 0;
-            tableInitialData.Paint += tableLayoutPanel1_Paint;
             // 
             // labelDiMachines
             // 
