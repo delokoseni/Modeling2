@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Modeling2
 {
@@ -219,6 +220,8 @@ namespace Modeling2
             CalcTpr(T);
             CalcToj(T, posled);
             UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(posled);
+            PrintTable2(posled, T);
         }
 
         private void buttonPetrovsRule2_Click(object sender, EventArgs e)
@@ -233,6 +236,8 @@ namespace Modeling2
             CalcTpr(T);
             CalcToj(T, posled);
             UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(posled);
+            PrintTable2(posled, T);
         }
 
         private void buttonPetrovsRule3_Click(object sender, EventArgs e)
@@ -247,6 +252,8 @@ namespace Modeling2
             CalcTpr(T);
             CalcToj(T, posled);
             UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(posled);
+            PrintTable2(posled, T);
         }
 
         // Массив времени
@@ -339,6 +346,70 @@ namespace Modeling2
                 tableLayoutPanel1.Controls.Add(label, N + 1, i + 1); // i + 1 с учетом заголовков
             }
         }
+
+        private void UpdateTableWithPosled(List<int> posled)
+        {
+            // Заполнение первого столбца таблицы значениями из List<int> posled
+            for (int i = 0; i < posled.Count; i++)
+            {
+                Label label = new Label
+                {
+                    Text = posled[i].ToString(),
+                    AutoSize = true,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill
+                };
+                tableLayoutPanel1.Controls.Add(label, 0, i+1); // 0 для первого столбца, i + 1 учитывает заголовки
+            }
+        }
+
+        private void PrintTable2(List<int> posled, double[,] T)
+        {
+            if (posled.Count == 0 || N < 7) return; // Проверка на наличие данных и достаточное количество столбцов
+
+            // Заполнение таблицы значениями
+            for (int i = 0; i < N; i++) // Проходим по индексам 'posled'
+            {
+                int posledIndex = posled[i] - 1; // Координаты в массиве 'initialDataArray'
+
+                if (posledIndex < initialDataArray.GetLength(0)) // Проверка на валидность индекса
+                {
+                    for (int j = 0; j < N; j++) // Проходим по столбцам 1-N
+                    {
+                        // Проверка на выход за границы массива T
+                        if (j < T.GetLength(1))
+                        {
+                            // Заполнение ячеек значениями из initialDataArray и T
+                            Label valueLabel = new Label
+                            {
+                                Text = $"{initialDataArray[posledIndex, j]} / {T[i, j]}",
+                                AutoSize = true,
+                                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                                Dock = DockStyle.Fill
+                            };
+                            tableLayoutPanel1.Controls.Add(valueLabel, j + 1, i + 1); // Заполнение ячеек (индексы с 1 по 7)
+                        }
+                    }
+                }
+            }
+
+            // Подсчет и заполнение итоговой ячейки
+            double tprSum = Tpr.Sum();
+            double tojSum = Toj.Sum();
+
+            // Заполнение итоговой ячейки
+            Label sumLabel = new Label
+            {
+                Text = $"{tprSum} / {tojSum}",
+                AutoSize = true,
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Fill
+            };
+            tableLayoutPanel1.Controls.Add(sumLabel, N + 1, N + 1); // Итоговая ячейка
+        }
+
+
+
 
 
     }

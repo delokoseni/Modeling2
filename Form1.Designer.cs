@@ -294,14 +294,14 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.Size = new Size(560, 337);
+            tableLayoutPanel1.Size = new Size(683, 337);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // labelTWaitingTableP1
             // 
             labelTWaitingTableP1.AutoSize = true;
             labelTWaitingTableP1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTWaitingTableP1.Location = new Point(500, 1);
+            labelTWaitingTableP1.Location = new Point(604, 1);
             labelTWaitingTableP1.Name = "labelTWaitingTableP1";
             labelTWaitingTableP1.Size = new Size(44, 20);
             labelTWaitingTableP1.TabIndex = 8;
@@ -311,7 +311,7 @@
             // 
             labelTableP17.AutoSize = true;
             labelTableP17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP17.Location = new Point(438, 1);
+            labelTableP17.Location = new Point(529, 1);
             labelTableP17.Name = "labelTableP17";
             labelTableP17.Size = new Size(18, 20);
             labelTableP17.TabIndex = 7;
@@ -321,7 +321,7 @@
             // 
             labelTableP6.AutoSize = true;
             labelTableP6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP6.Location = new Point(376, 1);
+            labelTableP6.Location = new Point(454, 1);
             labelTableP6.Name = "labelTableP6";
             labelTableP6.Size = new Size(18, 20);
             labelTableP6.TabIndex = 6;
@@ -331,7 +331,7 @@
             // 
             labelTableP15.AutoSize = true;
             labelTableP15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP15.Location = new Point(314, 1);
+            labelTableP15.Location = new Point(379, 1);
             labelTableP15.Name = "labelTableP15";
             labelTableP15.Size = new Size(18, 20);
             labelTableP15.TabIndex = 5;
@@ -341,7 +341,7 @@
             // 
             labelTableP14.AutoSize = true;
             labelTableP14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP14.Location = new Point(252, 1);
+            labelTableP14.Location = new Point(304, 1);
             labelTableP14.Name = "labelTableP14";
             labelTableP14.Size = new Size(18, 20);
             labelTableP14.TabIndex = 4;
@@ -351,7 +351,7 @@
             // 
             labelTableP13.AutoSize = true;
             labelTableP13.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP13.Location = new Point(190, 1);
+            labelTableP13.Location = new Point(229, 1);
             labelTableP13.Name = "labelTableP13";
             labelTableP13.Size = new Size(18, 20);
             labelTableP13.TabIndex = 3;
@@ -361,7 +361,7 @@
             // 
             labelTableP12.AutoSize = true;
             labelTableP12.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP12.Location = new Point(128, 1);
+            labelTableP12.Location = new Point(154, 1);
             labelTableP12.Name = "labelTableP12";
             labelTableP12.Size = new Size(18, 20);
             labelTableP12.TabIndex = 2;
@@ -381,7 +381,7 @@
             // 
             labelTableP11.AutoSize = true;
             labelTableP11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelTableP11.Location = new Point(66, 1);
+            labelTableP11.Location = new Point(79, 1);
             labelTableP11.Name = "labelTableP11";
             labelTableP11.Size = new Size(18, 20);
             labelTableP11.TabIndex = 1;
@@ -417,7 +417,7 @@
             // 
             // buttonPetrovsRule1
             // 
-            buttonPetrovsRule1.Location = new Point(1111, 42);
+            buttonPetrovsRule1.Location = new Point(1169, 48);
             buttonPetrovsRule1.Name = "buttonPetrovsRule1";
             buttonPetrovsRule1.Size = new Size(128, 29);
             buttonPetrovsRule1.TabIndex = 4;
@@ -427,7 +427,7 @@
             // 
             // buttonPetrovsRule3
             // 
-            buttonPetrovsRule3.Location = new Point(1111, 125);
+            buttonPetrovsRule3.Location = new Point(1169, 116);
             buttonPetrovsRule3.Name = "buttonPetrovsRule3";
             buttonPetrovsRule3.Size = new Size(128, 29);
             buttonPetrovsRule3.TabIndex = 5;
@@ -437,7 +437,7 @@
             // 
             // buttonPetrovsRule2
             // 
-            buttonPetrovsRule2.Location = new Point(1111, 83);
+            buttonPetrovsRule2.Location = new Point(1169, 83);
             buttonPetrovsRule2.Name = "buttonPetrovsRule2";
             buttonPetrovsRule2.Size = new Size(128, 29);
             buttonPetrovsRule2.TabIndex = 6;
@@ -447,7 +447,7 @@
             // 
             // buttonPetrovsRule4
             // 
-            buttonPetrovsRule4.Location = new Point(1111, 167);
+            buttonPetrovsRule4.Location = new Point(1169, 151);
             buttonPetrovsRule4.Name = "buttonPetrovsRule4";
             buttonPetrovsRule4.Size = new Size(128, 29);
             buttonPetrovsRule4.TabIndex = 7;
@@ -456,7 +456,7 @@
             // 
             // buttonEnumerate
             // 
-            buttonEnumerate.Location = new Point(1111, 209);
+            buttonEnumerate.Location = new Point(1169, 186);
             buttonEnumerate.Name = "buttonEnumerate";
             buttonEnumerate.Size = new Size(128, 29);
             buttonEnumerate.TabIndex = 8;
