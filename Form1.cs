@@ -21,14 +21,6 @@ namespace Modeling2
             string filePath = Path.Combine("..", "..", "..", "InitialData.txt"); // Поднимаемся на уровень выше и ищем файл
             ArrayLoader.LoadArrayFromFile(filePath, initialDataArray);
             FillTable(initialDataArray);
-            CalcPI();
-            CalcLI();
-            List<int> posled = Rule3();
-            labelPetrovsRule.Text = "По правилу Петрова № "; // + (1).ToString(); // Здесь 1 - номер правила
-            // Выводим список posled
-            string resultText = string.Join(", ", posled);
-            labelPetrovsRule.Text += resultText;
-
         }
 
         private void FillTable(int[,] array)
@@ -211,5 +203,34 @@ namespace Modeling2
             return posled;
         }
 
+        private void buttonPetrovsRule1_Click(object sender, EventArgs e)
+        {
+            CalcPI();
+            CalcLI();
+            List<int> posled = Rule1();
+            labelPetrovsRule.Text = "По правилу Петрова № 1 [";
+            labelPetrovsRule.Text += string.Join(", ", posled);
+            labelPetrovsRule.Text += "]";
+        }
+
+        private void buttonPetrovsRule2_Click(object sender, EventArgs e)
+        {
+            CalcPI();
+            CalcLI();
+            List<int> posled = Rule2();
+            labelPetrovsRule.Text = "По правилу Петрова № 2 [";
+            labelPetrovsRule.Text += string.Join(", ", posled);
+            labelPetrovsRule.Text += "]";
+        }
+
+        private void buttonPetrovsRule3_Click(object sender, EventArgs e)
+        {
+            CalcPI();
+            CalcLI();
+            List<int> posled = Rule3();
+            labelPetrovsRule.Text = "По правилу Петрова № 3 [";
+            labelPetrovsRule.Text += string.Join(", ", posled);
+            labelPetrovsRule.Text += "]";
+        }
     }
 }

@@ -57,6 +57,11 @@
             labelTDowntimeTableP1 = new Label();
             labelPetrovsRule = new Label();
             labelInitialData = new Label();
+            buttonPetrovsRule1 = new Button();
+            buttonPetrovsRule3 = new Button();
+            buttonPetrovsRule2 = new Button();
+            buttonPetrovsRule4 = new Button();
+            buttonEnumerate = new Button();
             tableInitialData.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -410,11 +415,64 @@
             labelInitialData.TabIndex = 3;
             labelInitialData.Text = "Исходные данные";
             // 
+            // buttonPetrovsRule1
+            // 
+            buttonPetrovsRule1.Location = new Point(1111, 42);
+            buttonPetrovsRule1.Name = "buttonPetrovsRule1";
+            buttonPetrovsRule1.Size = new Size(128, 29);
+            buttonPetrovsRule1.TabIndex = 4;
+            buttonPetrovsRule1.Text = "П. Петрова №1";
+            buttonPetrovsRule1.UseVisualStyleBackColor = true;
+            buttonPetrovsRule1.Click += buttonPetrovsRule1_Click;
+            // 
+            // buttonPetrovsRule3
+            // 
+            buttonPetrovsRule3.Location = new Point(1111, 125);
+            buttonPetrovsRule3.Name = "buttonPetrovsRule3";
+            buttonPetrovsRule3.Size = new Size(128, 29);
+            buttonPetrovsRule3.TabIndex = 5;
+            buttonPetrovsRule3.Text = "П. Петрова №3";
+            buttonPetrovsRule3.UseVisualStyleBackColor = true;
+            buttonPetrovsRule3.Click += buttonPetrovsRule3_Click;
+            // 
+            // buttonPetrovsRule2
+            // 
+            buttonPetrovsRule2.Location = new Point(1111, 83);
+            buttonPetrovsRule2.Name = "buttonPetrovsRule2";
+            buttonPetrovsRule2.Size = new Size(128, 29);
+            buttonPetrovsRule2.TabIndex = 6;
+            buttonPetrovsRule2.Text = "П. Петрова №2";
+            buttonPetrovsRule2.UseVisualStyleBackColor = true;
+            buttonPetrovsRule2.Click += buttonPetrovsRule2_Click;
+            // 
+            // buttonPetrovsRule4
+            // 
+            buttonPetrovsRule4.Location = new Point(1111, 167);
+            buttonPetrovsRule4.Name = "buttonPetrovsRule4";
+            buttonPetrovsRule4.Size = new Size(128, 29);
+            buttonPetrovsRule4.TabIndex = 7;
+            buttonPetrovsRule4.Text = "П. Петрова №4";
+            buttonPetrovsRule4.UseVisualStyleBackColor = true;
+            // 
+            // buttonEnumerate
+            // 
+            buttonEnumerate.Location = new Point(1111, 209);
+            buttonEnumerate.Name = "buttonEnumerate";
+            buttonEnumerate.Size = new Size(128, 29);
+            buttonEnumerate.TabIndex = 8;
+            buttonEnumerate.Text = "Перебор";
+            buttonEnumerate.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1782, 953);
+            Controls.Add(buttonEnumerate);
+            Controls.Add(buttonPetrovsRule4);
+            Controls.Add(buttonPetrovsRule2);
+            Controls.Add(buttonPetrovsRule3);
+            Controls.Add(buttonPetrovsRule1);
             Controls.Add(labelInitialData);
             Controls.Add(labelPetrovsRule);
             Controls.Add(tableLayoutPanel1);
@@ -460,5 +518,10 @@
         private Label labelTDowntimeTableP1;
         private Label labelPetrovsRule;
         private Label labelInitialData;
+        private Button buttonPetrovsRule1;
+        private Button buttonPetrovsRule3;
+        private Button buttonPetrovsRule2;
+        private Button buttonPetrovsRule4;
+        private Button buttonEnumerate;
     }
 }
