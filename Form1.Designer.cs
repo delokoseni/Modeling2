@@ -453,6 +453,7 @@
             buttonPetrovsRule4.TabIndex = 7;
             buttonPetrovsRule4.Text = "П. Петрова №4";
             buttonPetrovsRule4.UseVisualStyleBackColor = true;
+            buttonPetrovsRule4.Click += buttonPetrovsRule4_Click;
             // 
             // buttonEnumerate
             // 

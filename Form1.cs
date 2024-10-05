@@ -208,6 +208,155 @@ namespace Modeling2
             return posled;
         }
 
+        public List<int> Rule4()
+        {
+            List<List<double>> D0 = new List<List<double>>();
+            List<List<double>> D1 = new List<List<double>>();
+            List<List<double>> D2 = new List<List<double>>();
+            List<int> posled = new List<int>();
+
+            // Заполнение списков D0, D1 и D2
+            for (int i = 0; i < N; i++)
+            {
+                if (LI[i] == 0)
+                {
+                    D0.Add(new List<double> { i, PI1[i], PI2[i] });
+                }
+                else if (LI[i] > 0)
+                {
+                    D1.Add(new List<double> { i, PI1[i], PI2[i] });
+                }
+                else
+                {
+                    D2.Add(new List<double> { i, PI1[i], PI2[i] });
+                }
+            }
+
+            // Основная логика обработки
+            while (D1.Count > 0)
+            {
+                if (D1.Count == 1) break;
+
+                var maxElement = D1.OrderByDescending(x => x[2]).First();
+                D1.Remove(maxElement);
+
+                var minElement = D1.OrderBy(x => x[1]).First();
+                D1.Remove(minElement);
+
+                var computationResult = new List<double> // Переименовали переменную
+        {
+            maxElement[0], minElement[0],
+            maxElement[2] - minElement[1],
+            Math.Max(maxElement[2] - maxElement[1], minElement[2] - minElement[1]),
+            Math.Min(maxElement[2] - maxElement[1], minElement[2] - minElement[1])
+        };
+                // Добавляем результат в posled
+                posled.Add((int)maxElement[0] + 1);
+                posled.Add((int)minElement[0] + 1);
+            }
+
+            while (D0.Count > 0)
+            {
+                if (D1.Count == 1 && D0.Count == 1)
+                {
+                    var pair0 = D1[0];
+                    D1.RemoveAt(0);
+                    var pair1 = D0.OrderBy(x => x[1]).First();
+                    D0.Remove(pair1);
+
+                    var computationResult = new List<double> // Переименовали переменную
+            {
+                pair0[0], pair1[0],
+                pair0[2] - pair1[1],
+                Math.Max(pair0[2] - pair0[1], pair1[2] - pair1[1]),
+                Math.Min(pair0[2] - pair0[1], pair1[2] - pair1[1])
+            };
+                    // Добавляем результат в posled
+                    posled.Add((int)pair0[0] + 1);
+                    posled.Add((int)pair1[0] + 1);
+                    break;
+                }
+
+                if (D0.Count == 1) break;
+
+                var selected = D0.OrderByDescending(x => x[2]).First();
+                D0.Remove(selected);
+
+                var minElement = D0.OrderBy(x => x[1]).First();
+                D0.Remove(minElement);
+
+                var computationResultList = new List<double> // Переименовали переменную
+        {
+            selected[0], minElement[0],
+            selected[2] - minElement[1],
+            Math.Max(selected[2] - selected[1], minElement[2] - minElement[1]),
+            Math.Min(selected[2] - selected[1], minElement[2] - minElement[1])
+        };
+                // Добавляем результат в posled
+                posled.Add((int)selected[0] + 1);
+                posled.Add((int)minElement[0] + 1);
+            }
+
+            while (D2.Count > 0)
+            {
+                if ((D1.Count == 1 || D0.Count == 1) && D2.Count == 1)
+                {
+                    var pair0 = D1.Count == 1 ? D1[0] : D0[0];
+                    if (D1.Count == 1) D1.RemoveAt(0);
+                    else D0.RemoveAt(0);
+
+                    var pair1 = D2.OrderBy(x => x[1]).First();
+                    D2.Remove(pair1);
+
+                    var computationResultD2 = new List<double> // Переименовали переменную
+            {
+                pair0[0], pair1[0],
+                pair0[2] - pair1[1],
+                Math.Max(pair0[2] - pair0[1], pair1[2] - pair1[1]),
+                Math.Min(pair0[2] - pair0[1], pair1[2] - pair1[1])
+            };
+                    // Добавляем результат в posled
+                    posled.Add((int)pair0[0] + 1);
+                    posled.Add((int)pair1[0] + 1);
+                    break;
+                }
+
+                if (D2.Count == 1) break;
+
+                var maxInD2 = D2.OrderByDescending(x => x[2]).First();
+                D2.Remove(maxInD2);
+
+                var minInD2 = D2.OrderBy(x => x[1]).First();
+                D2.Remove(minInD2);
+
+                var computationResultD2List = new List<double> // Переименовали переменную
+        {
+            maxInD2[0], minInD2[0],
+            maxInD2[2] - minInD2[1],
+            Math.Max(maxInD2[2] - maxInD2[1], minInD2[2] - minInD2[1]),
+            Math.Min(maxInD2[2] - maxInD2[1], minInD2[2] - minInD2[1])
+        };
+                // Добавляем результат в posled
+                posled.Add((int)maxInD2[0] + 1);
+                posled.Add((int)minInD2[0] + 1);
+            }
+
+            // Обработка последнего элемента
+            if (N % 2 != 0)
+            {
+                var lastIndex = D0.Count > 0 ? D0[0][0] :
+                              D1.Count > 0 ? D1[0][0] :
+                              D2.Count > 0 ? D2[0][0] : -1;
+
+                if (lastIndex != -1)
+                {
+                    posled.Add((int)lastIndex + 1);
+                }
+            }
+
+            return posled;
+        }
+
         private void buttonPetrovsRule1_Click(object sender, EventArgs e)
         {
             CalcPI();
@@ -285,7 +434,6 @@ namespace Modeling2
             return T;
         }
 
-
         private void CalcTpr(double[,] T)
         {
             for (int i = 0; i < N; i++)
@@ -359,7 +507,7 @@ namespace Modeling2
                     TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill
                 };
-                tableLayoutPanel1.Controls.Add(label, 0, i+1); // 0 для первого столбца, i + 1 учитывает заголовки
+                tableLayoutPanel1.Controls.Add(label, 0, i + 1); // 0 для первого столбца, i + 1 учитывает заголовки
             }
         }
 
@@ -408,9 +556,20 @@ namespace Modeling2
             tableLayoutPanel1.Controls.Add(sumLabel, N + 1, N + 1); // Итоговая ячейка
         }
 
-
-
-
-
+        private void buttonPetrovsRule4_Click(object sender, EventArgs e)
+        {
+            CalcPI();
+            CalcLI();
+            List<int> posled = Rule4();
+            labelPetrovsRule.Text = "По правилу Петрова № 4 [";
+            labelPetrovsRule.Text += string.Join(", ", posled);
+            labelPetrovsRule.Text += "]";
+            double[,] T = CalcT(posled);
+            CalcTpr(T);
+            CalcToj(T, posled);
+            UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(posled);
+            PrintTable2(posled, T);
+        }
     }
 }
