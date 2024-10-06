@@ -62,6 +62,7 @@
             buttonPetrovsRule2 = new Button();
             buttonPetrovsRule4 = new Button();
             buttonEnumerate = new Button();
+            buttonRandom = new Button();
             tableInitialData.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -457,7 +458,7 @@
             // 
             // buttonEnumerate
             // 
-            buttonEnumerate.Location = new Point(1169, 186);
+            buttonEnumerate.Location = new Point(1169, 221);
             buttonEnumerate.Name = "buttonEnumerate";
             buttonEnumerate.Size = new Size(128, 29);
             buttonEnumerate.TabIndex = 8;
@@ -465,11 +466,22 @@
             buttonEnumerate.UseVisualStyleBackColor = true;
             buttonEnumerate.Click += buttonEnumerate_Click;
             // 
+            // buttonRandom
+            // 
+            buttonRandom.Location = new Point(1169, 186);
+            buttonRandom.Name = "buttonRandom";
+            buttonRandom.Size = new Size(128, 29);
+            buttonRandom.TabIndex = 9;
+            buttonRandom.Text = "Сл. послед.";
+            buttonRandom.UseVisualStyleBackColor = true;
+            buttonRandom.Click += buttonRandom_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1782, 953);
+            Controls.Add(buttonRandom);
             Controls.Add(buttonEnumerate);
             Controls.Add(buttonPetrovsRule4);
             Controls.Add(buttonPetrovsRule2);
@@ -525,5 +537,6 @@
         private Button buttonPetrovsRule2;
         private Button buttonPetrovsRule4;
         private Button buttonEnumerate;
+        private Button buttonRandom;
     }
 }

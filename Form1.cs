@@ -675,5 +675,44 @@ namespace Modeling2
             return minPerm;
         }
 
+        private void buttonRandom_Click(object sender, EventArgs e)
+        {
+            CalcPI();
+            CalcLI();
+
+            // Генерируем случайную последовательность
+            List<int> randomSequence = GetRandomSequence(N);
+
+            // Обновляем текст метки с результатом
+            labelPetrovsRule.Text = "Случайная последовательность [";
+            labelPetrovsRule.Text += string.Join(", ", randomSequence);
+            labelPetrovsRule.Text += "]";
+
+            double[,] T = CalcT(randomSequence);
+            CalcTpr(T);
+            CalcToj(T, randomSequence);
+            UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(randomSequence);
+            PrintTable2(randomSequence, T);
+        }
+
+        private List<int> GetRandomSequence(int size)
+        {
+            Random random = new Random();
+            List<int> sequence = Enumerable.Range(1, size).ToList(); // Создаем список от 1 до size
+
+            // Перемешиваем последовательность
+            for (int i = 0; i < sequence.Count; i++)
+            {
+                int j = random.Next(i, sequence.Count); // Получаем случайный индекс
+                                                        // Меняем элементы местами
+                int temp = sequence[i];
+                sequence[i] = sequence[j];
+                sequence[j] = temp;
+            }
+
+            return sequence;
+        }
+
     }
 }
