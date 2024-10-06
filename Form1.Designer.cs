@@ -463,6 +463,7 @@
             buttonEnumerate.TabIndex = 8;
             buttonEnumerate.Text = "Перебор";
             buttonEnumerate.UseVisualStyleBackColor = true;
+            buttonEnumerate.Click += buttonEnumerate_Click;
             // 
             // Form1
             // 

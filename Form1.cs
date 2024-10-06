@@ -571,5 +571,109 @@ namespace Modeling2
             UpdateTableWithPosled(posled);
             PrintTable2(posled, T);
         }
+
+        private void buttonEnumerate_Click(object sender, EventArgs e)
+        {
+            CalcPI();
+            CalcLI();
+            List<int> posled = Task();
+            labelPetrovsRule.Text = "Результат методом перебора [";
+            labelPetrovsRule.Text += string.Join(", ", posled);
+            labelPetrovsRule.Text += "]";
+            double[,] T = CalcT(posled);
+            CalcTpr(T);
+            CalcToj(T, posled);
+            UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(posled);
+            PrintTable2(posled, T);
+        }
+
+        //рандом
+        private int[] Swap(int[] array, int i, int j)
+        {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            return array;
+        }
+
+        private bool NextSet(int[] a, int n)
+        {
+            int j = n - 2;
+            while (j != -1 && a[j] >= a[j + 1])
+            {
+                j--;
+            }
+
+            if (j == -1)
+            {
+                return false; // Нет следующей перестановки
+            }
+
+            int k = n - 1;
+            while (a[j] >= a[k])
+            {
+                k--;
+            }
+
+            Swap(a, j, k);
+
+            int l = j + 1;
+            int r = n - 1;
+
+            while (l < r)
+            {
+                Swap(a, l, r);
+                l++;
+                r--;
+            }
+
+            return true; // Перестановка была изменена
+        }
+
+        private List<List<int>> AllPosled(int N)
+        {
+            List<List<int>> permutations = new List<List<int>>();
+            int[] Nt = new int[N];
+            for (int i = 0; i < N; i++)
+            {
+                Nt[i] = i + 1;
+            }
+            permutations.Add(Nt.ToList());
+
+            while (NextSet(Nt, N))
+            {
+                permutations.Add(Nt.ToList());
+            }
+
+            return permutations;
+        }
+
+        private List<int> Task()
+        {
+            List<List<int>> permutations = AllPosled(N);
+            double minT = double.MaxValue;
+            double minToj = double.MaxValue;
+            List<int> minPerm = null;
+
+            foreach (var perm in permutations)
+            {
+                double[,] T = CalcT(perm); // Используем метод CalcT
+                CalcToj(T, perm); // Метод обновляет массив Toj
+
+                double currentTValue = T[N - 1, N - 1];
+
+                if (currentTValue < minT ||
+                    (currentTValue == minT && Toj.Sum() < minToj))
+                {
+                    minT = currentTValue;
+                    minPerm = new List<int>(perm); // Клонируем список
+                    minToj = Toj.Sum();
+                }
+            }
+
+            return minPerm;
+        }
+
     }
 }
