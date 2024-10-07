@@ -6,13 +6,13 @@ namespace Modeling2
     public partial class Form1 : Form
     {
         private int[,] initialDataArray;
-
         private int N = 7;
         private double[] PI1;
         private double[] PI2;
         private double[] LI;
         double[] Tpr;
         double[] Toj;
+        private Graphics g;
 
         public Form1()
         {
@@ -23,6 +23,7 @@ namespace Modeling2
             LI = new double[N];
             Tpr = new double[N];
             Toj = new double[N];
+            g = CreateGraphics();
             string filePath = Path.Combine("..", "..", "..", "InitialData.txt"); // Поднимаемся на уровень выше и ищем файл
             ArrayLoader.LoadArrayFromFile(filePath, initialDataArray);
             FillTable(initialDataArray);
@@ -371,6 +372,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(posled);
             PrintTable2(posled, T);
+            DrawProcessingTimes(posled);
         }
 
         private void buttonPetrovsRule2_Click(object sender, EventArgs e)
@@ -713,6 +715,64 @@ namespace Modeling2
 
             return sequence;
         }
+
+        private void DrawProcessingTimes(List<int> posled)
+        {
+            int detailCount = N; // Количество деталей
+            int spacingBetweenLines = 20; // Промежуток между строками
+            int heightOfEachLine = 10; // Высота каждой линии
+            int baseY = 400; // Начальная координата Y для рисования
+            Color[] colors = new Color[]
+            {
+        Color.Red, Color.Green, Color.Blue,
+        Color.Yellow, Color.Cyan, Color.Magenta, Color.Orange
+            };
+
+            for (int machine = 0; machine < detailCount; machine++)
+            {
+                // Загрузка нужных деталей из initialDataArray
+                int yOffset = baseY + machine * (heightOfEachLine + spacingBetweenLines);
+                int currentX = 0; // Начальная координата X для рисования
+
+                // Рисуем серую линию перед каждой строкой (кроме первой)
+                if (machine > 0) // Пропускаем первую строку
+                {
+                    int grayLineLength = 0;
+
+                    // Считаем длину серой линии на основе предыдущих станков
+                    for (int prevMachine = 0; prevMachine < machine; prevMachine++)
+                    {
+                        int detailIndex = posled[0] - 1; // Индекс первой детали (с 0)
+                        grayLineLength += initialDataArray[detailIndex, prevMachine] * 10; // Время * 10 (в пикселях)
+                    }
+
+                    // Рисуем серую линию
+                    using (Brush grayBrush = new SolidBrush(Color.Gray))
+                    {
+                        g.FillRectangle(grayBrush, currentX, yOffset, grayLineLength, heightOfEachLine);
+                    }
+                    currentX += grayLineLength; // Обновляем текущую координату X после рисования серой линии
+                }
+
+                for (int count = 1; count <= detailCount; count++)
+                {
+                    int detailIndex = posled[count - 1] - 1; // Индекс детали (с 0)
+                    int processingTime = initialDataArray[detailIndex, machine] * 10; // Время * 10 (в пикселях)
+
+                    // Определяем цвет для каждой детали
+                    using (Brush brush = new SolidBrush(colors[detailIndex % colors.Length]))
+                    {
+                        // Рисуем прямоугольник для времени обработки
+                        g.FillRectangle(brush, currentX, yOffset, processingTime, heightOfEachLine);
+                    }
+
+                    // Обновляем текущую координату X
+                    currentX += processingTime;
+                }
+            }
+        }
+
+
 
     }
 }
