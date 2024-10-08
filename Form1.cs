@@ -27,7 +27,6 @@ namespace Modeling2
             string filePath = Path.Combine("..", "..", "..", "InitialData.txt"); // Поднимаемся на уровень выше и ищем файл
             ArrayLoader.LoadArrayFromFile(filePath, initialDataArray);
             FillTable(initialDataArray);
-            initialCalculateAndDraw();
         }
 
         private void FillTable(int[,] array)
@@ -892,7 +891,7 @@ namespace Modeling2
             }
         }
 
-        private void initialCalculateAndDraw()
+        private void buttonStartSequence_Click(object sender, EventArgs e)
         {
             CalcPI(); // Вычисление PI
             CalcLI(); // Вычисление LI
@@ -911,8 +910,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(baseSequence);
             PrintTable2(baseSequence, T);
-            DrawProcessingTimes(baseSequence); // Вызываем метод рисования графиков
+            DrawProcessingTimes(baseSequence);
         }
-
     }
 }
