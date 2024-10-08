@@ -27,6 +27,7 @@ namespace Modeling2
             string filePath = Path.Combine("..", "..", "..", "InitialData.txt"); // Поднимаемся на уровень выше и ищем файл
             ArrayLoader.LoadArrayFromFile(filePath, initialDataArray);
             FillTable(initialDataArray);
+            initialCalculateAndDraw();
         }
 
         private void FillTable(int[,] array)
@@ -472,51 +473,84 @@ namespace Modeling2
 
         private void UpdateTableWithTojAndTpr()
         {
-            // Вывод Tpr в нижнюю строку таблицы
+            tableLayoutPanel1.SuspendLayout();
+
+            // Обновление Tpr в нижней строке таблицы
             for (int j = 0; j < N; j++)
             {
-                Label label = new Label
+                // Пытаемся найти метку в ячейке
+                if (tableLayoutPanel1.GetControlFromPosition(j + 1, N + 1) is Label existingLabel)
                 {
-                    Text = Tpr[j].ToString(),
-                    AutoSize = true,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill
-                };
-                tableLayoutPanel1.Controls.Add(label, j + 1, N + 1); // j + 1 с учетом заголовков
+                    existingLabel.Text = Tpr[j].ToString(); // Обновляем текст
+                }
+                else
+                {
+                    // Создаем метку, если ее нет
+                    Label label = new Label
+                    {
+                        Text = Tpr[j].ToString(),
+                        AutoSize = true,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                        Dock = DockStyle.Fill
+                    };
+                    tableLayoutPanel1.Controls.Add(label, j + 1, N + 1); // j + 1 с учетом заголовков
+                }
             }
 
-            // Вывод Toj в правый столбец таблицы
+            // Обновление Toj в правом столбце таблицы
             for (int i = 0; i < N; i++)
             {
-                Label label = new Label
+                if (tableLayoutPanel1.GetControlFromPosition(N + 1, i + 1) is Label existingLabel)
                 {
-                    Text = Toj[i].ToString(),
-                    AutoSize = true,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill
-                };
-                tableLayoutPanel1.Controls.Add(label, N + 1, i + 1); // i + 1 с учетом заголовков
+                    existingLabel.Text = Toj[i].ToString(); // Обновляем текст
+                }
+                else
+                {
+                    Label label = new Label
+                    {
+                        Text = Toj[i].ToString(),
+                        AutoSize = true,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                        Dock = DockStyle.Fill
+                    };
+                    tableLayoutPanel1.Controls.Add(label, N + 1, i + 1); // i + 1 с учетом заголовков
+                }
             }
+
+            tableLayoutPanel1.ResumeLayout();
         }
 
         private void UpdateTableWithPosled(List<int> posled)
         {
+            tableLayoutPanel1.SuspendLayout();
+
             // Заполнение первого столбца таблицы значениями из List<int> posled
             for (int i = 0; i < posled.Count; i++)
             {
-                Label label = new Label
+                if (tableLayoutPanel1.GetControlFromPosition(0, i + 1) is Label existingLabel)
                 {
-                    Text = posled[i].ToString(),
-                    AutoSize = true,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill
-                };
-                tableLayoutPanel1.Controls.Add(label, 0, i + 1); // 0 для первого столбца, i + 1 учитывает заголовки
+                    existingLabel.Text = posled[i].ToString(); // Обновляем текст
+                }
+                else
+                {
+                    Label label = new Label
+                    {
+                        Text = posled[i].ToString(),
+                        AutoSize = true,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                        Dock = DockStyle.Fill
+                    };
+                    tableLayoutPanel1.Controls.Add(label, 0, i + 1); // 0 для первого столбца
+                }
             }
+
+            tableLayoutPanel1.ResumeLayout();
         }
 
         private void PrintTable2(List<int> posled, double[,] T)
         {
+            tableLayoutPanel1.SuspendLayout();
+
             if (posled.Count == 0 || N < 7) return; // Проверка на наличие данных и достаточное количество столбцов
 
             // Заполнение таблицы значениями
@@ -528,18 +562,25 @@ namespace Modeling2
                 {
                     for (int j = 0; j < N; j++) // Проходим по столбцам 1-N
                     {
-                        // Проверка на выход за границы массива T
                         if (j < T.GetLength(1))
                         {
-                            // Заполнение ячеек значениями из initialDataArray и T
-                            Label valueLabel = new Label
+                            if (tableLayoutPanel1.GetControlFromPosition(j + 1, i + 1) is Label existingLabel)
                             {
-                                Text = $"{initialDataArray[posledIndex, j]} / {T[i, j]}",
-                                AutoSize = true,
-                                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                                Dock = DockStyle.Fill
-                            };
-                            tableLayoutPanel1.Controls.Add(valueLabel, j + 1, i + 1); // Заполнение ячеек (индексы с 1 по 7)
+                                // Обновляем текст существующей метки
+                                existingLabel.Text = $"{initialDataArray[posledIndex, j]} / {T[i, j]}";
+                            }
+                            else
+                            {
+                                // Заполнение ячеек значениями из initialDataArray и T
+                                Label valueLabel = new Label
+                                {
+                                    Text = $"{initialDataArray[posledIndex, j]} / {T[i, j]}",
+                                    AutoSize = true,
+                                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                                    Dock = DockStyle.Fill
+                                };
+                                tableLayoutPanel1.Controls.Add(valueLabel, j + 1, i + 1); // Заполнение ячеек (индексы с 1 по 7)
+                            }
                         }
                     }
                 }
@@ -550,15 +591,26 @@ namespace Modeling2
             double tojSum = Toj.Sum();
 
             // Заполнение итоговой ячейки
-            Label sumLabel = new Label
+            if (tableLayoutPanel1.GetControlFromPosition(N + 1, N + 1) is Label sumLabel)
             {
-                Text = $"{tprSum} / {tojSum}",
-                AutoSize = true,
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                Dock = DockStyle.Fill
-            };
-            tableLayoutPanel1.Controls.Add(sumLabel, N + 1, N + 1); // Итоговая ячейка
+                sumLabel.Text = $"{tprSum} / {tojSum}"; // Обновляем текст итоговой ячейки
+            }
+            else
+            {
+                Label newSumLabel = new Label
+                {
+                    Text = $"{tprSum} / {tojSum}",
+                    AutoSize = true,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill
+                };
+                tableLayoutPanel1.Controls.Add(newSumLabel, N + 1, N + 1); // Итоговая ячейка
+            }
+
+            tableLayoutPanel1.ResumeLayout();
         }
+
+
 
         private void buttonPetrovsRule4_Click(object sender, EventArgs e)
         {
@@ -700,6 +752,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(randomSequence);
             PrintTable2(randomSequence, T);
+            DrawProcessingTimes(randomSequence);
         }
 
         private List<int> GetRandomSequence(int size)
@@ -722,6 +775,8 @@ namespace Modeling2
 
         private void DrawProcessingTimes(List<int> posled)
         {
+            g.Clear(this.BackColor);
+
             int detailCount = N; // Количество деталей
             int spacingBetweenLines = 20; // Промежуток между строками
             int heightOfEachLine = 10; // Высота каждой линии
@@ -835,6 +890,28 @@ namespace Modeling2
                     g.DrawString(machineLabel, font, Brushes.Black, labelX, labelY);
                 }
             }
+        }
+
+        private void initialCalculateAndDraw()
+        {
+            CalcPI(); // Вычисление PI
+            CalcLI(); // Вычисление LI
+
+            // Используем базовую последовательность от 1 до N
+            List<int> baseSequence = Enumerable.Range(1, N).ToList();
+
+            labelPetrovsRule.Text = "Начальная последовательность [";
+            labelPetrovsRule.Text += string.Join(", ", baseSequence);
+            labelPetrovsRule.Text += "]";
+
+            double[,] T = CalcT(baseSequence);
+            CalcTpr(T);
+            CalcToj(T, baseSequence);
+
+            UpdateTableWithTojAndTpr();
+            UpdateTableWithPosled(baseSequence);
+            PrintTable2(baseSequence, T);
+            DrawProcessingTimes(baseSequence); // Вызываем метод рисования графиков
         }
 
     }
