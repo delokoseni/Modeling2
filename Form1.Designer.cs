@@ -69,7 +69,6 @@
             // 
             // tableInitialData
             // 
-            tableInitialData.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             tableInitialData.AutoSize = true;
             tableInitialData.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             tableInitialData.ColumnCount = 8;

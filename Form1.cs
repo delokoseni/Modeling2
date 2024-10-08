@@ -728,8 +728,8 @@ namespace Modeling2
             int baseY = 400; // Ќачальна€ координата Y дл€ рисовани€
             Color[] colors = new Color[]
             {
-        Color.Red, Color.Green, Color.Blue,
-        Color.Yellow, Color.Cyan, Color.Magenta, Color.Orange
+                Color.Red, Color.Green, Color.Blue,
+                Color.Yellow, Color.Cyan, Color.Magenta, Color.Orange
             };
 
             // ƒвумерный массив дл€ хранени€ времЄн завершени€ обработки деталей на каждом станке
