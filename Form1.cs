@@ -389,6 +389,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(posled);
             PrintTable2(posled, T);
+            DrawProcessingTimes(posled);
         }
 
         private void buttonPetrovsRule3_Click(object sender, EventArgs e)
@@ -405,6 +406,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(posled);
             PrintTable2(posled, T);
+            DrawProcessingTimes(posled);
         }
 
         // Массив времени
@@ -572,6 +574,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(posled);
             PrintTable2(posled, T);
+            DrawProcessingTimes(posled);
         }
 
         private void buttonEnumerate_Click(object sender, EventArgs e)
@@ -588,6 +591,7 @@ namespace Modeling2
             UpdateTableWithTojAndTpr();
             UpdateTableWithPosled(posled);
             PrintTable2(posled, T);
+            DrawProcessingTimes(posled);
         }
 
         //рандом
@@ -728,51 +732,110 @@ namespace Modeling2
         Color.Yellow, Color.Cyan, Color.Magenta, Color.Orange
             };
 
+            // Двумерный массив для хранения времён завершения обработки деталей на каждом станке
+            int[,] completionTimes = new int[detailCount, detailCount];
+
             for (int machine = 0; machine < detailCount; machine++)
             {
-                // Загрузка нужных деталей из initialDataArray
                 int yOffset = baseY + machine * (heightOfEachLine + spacingBetweenLines);
                 int currentX = 0; // Начальная координата X для рисования
 
-                // Рисуем серую линию перед каждой строкой (кроме первой)
-                if (machine > 0) // Пропускаем первую строку
+                for (int count = 0; count < detailCount; count++)
                 {
-                    int grayLineLength = 0;
-
-                    // Считаем длину серой линии на основе предыдущих станков
-                    for (int prevMachine = 0; prevMachine < machine; prevMachine++)
-                    {
-                        int detailIndex = posled[0] - 1; // Индекс первой детали (с 0)
-                        grayLineLength += initialDataArray[detailIndex, prevMachine] * 10; // Время * 10 (в пикселях)
-                    }
-
-                    // Рисуем серую линию
-                    using (Brush grayBrush = new SolidBrush(Color.Gray))
-                    {
-                        g.FillRectangle(grayBrush, currentX, yOffset, grayLineLength, heightOfEachLine);
-                    }
-                    currentX += grayLineLength; // Обновляем текущую координату X после рисования серой линии
-                }
-
-                for (int count = 1; count <= detailCount; count++)
-                {
-                    int detailIndex = posled[count - 1] - 1; // Индекс детали (с 0)
+                    int detailIndex = posled[count] - 1; // Индекс детали (с 0)
                     int processingTime = initialDataArray[detailIndex, machine] * 10; // Время * 10 (в пикселях)
 
-                    // Определяем цвет для каждой детали
+                    // Определяем время простоя
+                    if (machine > 0 && processingTime > 0) // Проверяем, что время обработки больше 0
+                    {
+                        int previousCompletionTime = completionTimes[detailIndex, machine - 1];
+                        if (currentX < previousCompletionTime)
+                        {
+                            int idleTime = previousCompletionTime - currentX;
+
+                            if (count < detailCount - 1 || idleTime > 0)
+                            {
+                                using (Brush grayBrush = new SolidBrush(Color.Gray))
+                                {
+                                    g.FillRectangle(grayBrush, currentX, yOffset, idleTime, heightOfEachLine);
+                                }
+
+                                if (idleTime > 0)
+                                {
+                                    string idleText = (idleTime / 10).ToString(); // Делим на 10 для отображения длины
+                                    using (Font font = new Font("Arial", 8))
+                                    {
+                                        SizeF textSize = g.MeasureString(idleText, font);
+                                        float textX = currentX + (idleTime - textSize.Width) / 2;
+                                        float textY = yOffset + (heightOfEachLine - textSize.Height) / 2;
+                                        g.DrawString(idleText, font, Brushes.Black, textX, textY);
+                                    }
+                                }
+
+                                currentX += idleTime; // Обновляем текущую координату X после простоя
+                            }
+                        }
+                    }
+
+                    // Определяем цвет для каждой детали и рисуем прямоугольник для времени обработки
                     using (Brush brush = new SolidBrush(colors[detailIndex % colors.Length]))
                     {
-                        // Рисуем прямоугольник для времени обработки
-                        g.FillRectangle(brush, currentX, yOffset, processingTime, heightOfEachLine);
+                        if (processingTime > 0) // Проверяем, что время обработки больше 0
+                        {
+                            g.FillRectangle(brush, currentX, yOffset, processingTime, heightOfEachLine);
+
+                            string text = initialDataArray[detailIndex, machine].ToString();
+                            using (Font font = new Font("Arial", 8))
+                            {
+                                SizeF textSize = g.MeasureString(text, font);
+                                float textX = currentX + (processingTime - textSize.Width) / 2;
+                                float textY = yOffset + (heightOfEachLine - textSize.Height) / 2;
+                                g.DrawString(text, font, Brushes.Black, textX, textY);
+                            }
+                        }
                     }
+
+                    // Обновляем время завершения обработки детали на текущем станке
+                    completionTimes[detailIndex, machine] = currentX + processingTime;
 
                     // Обновляем текущую координату X
                     currentX += processingTime;
                 }
+
+                // Проверяем наличие времени простоя после обработки всех деталей
+                if (currentX < completionTimes[detailCount - 1, machine])
+                {
+                    int idleTimeAfterProcessing = completionTimes[detailCount - 1, machine] - currentX;
+
+                    if (idleTimeAfterProcessing > 0)
+                    {
+                        using (Brush grayBrush = new SolidBrush(Color.Gray))
+                        {
+                            g.FillRectangle(grayBrush, currentX, yOffset, idleTimeAfterProcessing, heightOfEachLine);
+                        }
+
+                        string idleTextAfterProcessing = (idleTimeAfterProcessing / 10).ToString();
+                        using (Font font = new Font("Arial", 8))
+                        {
+                            SizeF textSize = g.MeasureString(idleTextAfterProcessing, font);
+                            float textX = currentX + (idleTimeAfterProcessing - textSize.Width) / 2;
+                            float textY = yOffset + (heightOfEachLine - textSize.Height) / 2;
+                            g.DrawString(idleTextAfterProcessing, font, Brushes.Black, textX, textY);
+                        }
+                    }
+                }
+
+                // Добавляем текст "Станок №" над каждой строкой
+                using (Font font = new Font("Arial", 8))
+                {
+                    string machineLabel = $"Станок №{machine + 1}";
+                    SizeF labelSize = g.MeasureString(machineLabel, font);
+                    float labelX = 0; // Позиция X для метки
+                    float labelY = baseY + machine * (heightOfEachLine + spacingBetweenLines) - labelSize.Height - 3;
+                    g.DrawString(machineLabel, font, Brushes.Black, labelX, labelY);
+                }
             }
         }
-
-
 
     }
 }
